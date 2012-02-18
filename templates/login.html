@@ -14,12 +14,39 @@
 			background-color: #fbfbfb;
 			font: normal normal normal 0.8125em/normal Verdana, sans-serif;
 		}
+		
+		#header {
+			background-color: #1b1a41;
+			font-family: Georgia, serif;
+			font-size: 12pt;
+			/*padding-top: 1.6em;
+			padding-bottom: 1.6em;*/
+			padding-top: 1px;
+			padding-bottom: 1px;
+			/*text-transform: lowercase;*/
+			color: white;
+			text-align: center;
+		}
+
+		#header p {
+			font-family: Georgia, serif;
+			color: #aaa;
+			font-size: 9.22pt;
+		}
+		#header a {
+			text-decoration: none;
+			color: #aaa;
+		}
+		#header a:hover {
+			text-decoration: underline;
+			color: #aaa;
+		}
 		h1 {
 			font-family: Georgia, serif;
 			font-size: 14pt;
 			padding-top: 1.6em;
 			padding-bottom: 1.6em;
-			text-transform: lowercase;
+			/*text-transform: lowercase;*/
 			text-align: center;
 			font-weight: normal;
 			font-style: italic;
@@ -61,6 +88,12 @@
 </head>
 
 <body>
+<div id="header">
+		<h1 style="">Informatics Booklist</h1>
+		<p><a href="http://ics.uci.edu/informatics">Department of Informatics</a><br/>
+		<a href="http://ics.uci.edu">Donald Bren School of Information and Computer Sciences</a><br/>
+		<a href="http://uci.edu">University of California, Irvine</a></p>
+	</div>
 
 	{% if form.errors %}
 	<p>Your username and password didn't match. Please try again.</p>

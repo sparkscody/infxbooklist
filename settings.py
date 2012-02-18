@@ -4,7 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Sam Kaufman', 'kaufmans@uci.edu'),
+    ('Cody Sparks', 'sparks.cody@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -65,7 +65,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'infxbooklist.urls'
 
 TEMPLATE_DIRS = (
-    '/Users/emrys/Code/infxbooklist/templates'
+    '/root/project/infxbooklist/templates/'
 )
 
 INSTALLED_APPS = (
