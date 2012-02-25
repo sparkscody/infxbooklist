@@ -93,3 +93,8 @@ class FeedbackNote(models.Model):
     text = models.TextField()
     def __unicode__(self):
         return self.text[:100]
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True, related_name='profile')
+    picture = models.CharField(max_length=100, default='http://http://www.ics.uci.edu/~kay/dgk1.jpg')
+    site = models.CharField(max_length=100, default='http://uci.edu')

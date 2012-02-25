@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     (r'^feedback/$', 'infxbooklist.booklistapp.views.feedback'),
     (r'^edit/$', 'infxbooklist.booklistapp.views.edit'),
     (r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+	(r'^profile/$', 'infxbooklist.booklistapp.views.profile'),
 )
 
 if settings.DEBUG:

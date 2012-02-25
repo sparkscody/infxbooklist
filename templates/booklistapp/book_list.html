@@ -6,6 +6,7 @@
 <head>
 	<title>{{ page_title }}{%if page_title%}, {%endif%}Informatics Book List</title>
 	<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.1.min.js"></script>
+<script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js"></script>
 	<style type="text/css" media="screen">
 		html, body {
 			padding: 0 0 0 0;
@@ -122,6 +123,17 @@
 		#footer p {
 			margin: 0.3em;
 		}
+
+/* tooltip styling */
+.tooltip {
+	display:none;
+	background:url(http://static.flowplayer.org/tools/img/tooltip/white_arrow_big.png);
+	height:163px;
+	padding:40px 30px 10px 30px;
+	width:310px;
+	font-size:11px;
+	color:#000000;
+}
 	</style>
 </head>
 
@@ -147,11 +159,34 @@
 					<p class="title"><a href="{{ book.url }}" class="booktitle">{{ book.title }}</a></p>
 					<p class="author">by {{ book.authors }}</p>
 					{% if complete_view %}
+					<p> Recommendations: </p>
 						{% with book.get_comments as comments %}
 							{% for c in comments %}
-							<p class="bookcomment">
-								<strong>{{ c.user }}</strong>:&nbsp;{{ c.comment }}
-							</p>
+							<p id="comment" class="bookcomment">
+								<strong>{{ c.user }}</strong>							</p>
+<div class="tooltip">
+
+	<img src="http://www.ics.uci.edu/~kay/dgk1.jpg" width="75" height="100" alt="Flying screens" 
+		style="float:left;margin:0 15px 20px 0" />
+
+	<table style="margin:0">
+		<tr>
+			<td class="label">Reason for recommendation: </td>
+		</tr>
+<tr>
+			<td>{{ c.comment }}</td>
+		</tr>
+	</table>
+
+</div>
+
+<script>
+// What is $(document).ready ? See: http://flowplayer.org/tools/documentation/basics.html#document_ready
+$(document).ready(function() {
+
+$("#comment").tooltip();
+});
+</script>
 							{% endfor %}
 							{% with book.get_silent_recommendations as sil_recs %}
 								{% if sil_recs %}

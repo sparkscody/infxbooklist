@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+	<title>Profile - Informatics Book List</title>
+	<link rel="stylesheet" href="/static/base.css" type="text/css" charset="utf-8" />
+	<style type="text/css">
+		/*body {
+			width: 30em;
+			font-family: sans-serif;
+		}*/
+		html, body {
+			padding: 0 0 0 0;
+			margin: 0 0 0 0;
+			background-color: #fbfbfb;
+			font: normal normal normal 0.8125em/normal Verdana, sans-serif;
+		}
+		p, label {
+			font-size: small;
+		}
+		#header {
+			background-color: #1b1a41;
+			font-family: Georgia, serif;
+			font-size: 12pt;
+			/*padding-top: 1.6em;
+			padding-bottom: 1.6em;*/
+			padding-top: 1px;
+			padding-bottom: 1px;
+			/*text-transform: lowercase;*/
+			color: white;
+			text-align: center;
+		}
+		h1 {
+			color: white;
+			font-weight: normal;
+			margin-bottom: 0;
+			font-style: italic;
+		}
+		#header p {
+			font-family: Georgia, serif;
+			color: #aaa;
+			font-size: 9.22pt;
+		}
+		#header a {
+			text-decoration: none;
+			color: #aaa;
+		}
+		#header a:hover {
+			text-decoration: underline;
+			color: #aaa;
+		}
+		IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+	</style>
+</head>
+<body>
+	<div id="header">
+		<h1 style="">Informatics Booklist</h1>
+		<p><a href="http://ics.uci.edu/informatics">Department of Informatics</a><br/>
+		<a href="http://ics.uci.edu">Donald Bren School of Information and Computer Sciences</a><br/>
+		<a href="http://uci.edu">University of California, Irvine</a></p>
+	</div>
+	
+	<h2 align="center">Your Profile</h2>
+	
+	<p align="center">Your current profile picture: </p>
+	<img class="displayed" src="http://www.ics.uci.edu/~kay/dgk1.jpg" width="75" height="100" />
+	<p align="center">If you'd like, you can upload a new one here: </p>
+	<form align="center" action="/profile/" method="get" accept-charset="utf-8">
+		<p><input type="text" name="keywords" value="" id="keywords" style="font-size: large" />
+			<input type="submit" value="Upload">
+		</p>
+	</form>
+	<br>
+	<p align="center">Your site URL: </p>
+	<form align="center" action="/profile/" method="get" accept-charset="utf-8">
+		<p><input type="text" name="keywords" value="" id="keywords" style="font-size: large" />
+			<input type="submit" value="Submit">
+		</p>
+	</form>
+</body>
+</html>

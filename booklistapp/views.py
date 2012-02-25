@@ -145,6 +145,8 @@ def edit(request):
     # Go.
     return render_to_response('edit.html', context)
     
+def profile(request):
+	return render_to_response('profile.html', {"foo" : "bar"})
     
 def feedback(request):
     if 'text' in request.POST:
