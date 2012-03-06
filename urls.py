@@ -9,7 +9,8 @@ urlpatterns = patterns('',
     (r'^feedback/$', 'infxbooklist.booklistapp.views.feedback'),
     (r'^edit/$', 'infxbooklist.booklistapp.views.edit'),
     (r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-	(r'^profile/$', 'infxbooklist.booklistapp.views.profile'),
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    (r'^profile/$', 'infxbooklist.booklistapp.views.profile'),
 )
 
 if settings.DEBUG:
@@ -19,7 +20,9 @@ if settings.DEBUG:
         (r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': 'static'}),
         (r'^bookcovers/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': 'bookcovers'})
+            {'document_root': 'bookcovers'}),
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,}),
     )
     
 urlpatterns += patterns('',

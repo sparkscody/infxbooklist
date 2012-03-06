@@ -4,8 +4,9 @@ from django.core.paginator import Paginator
 from django.contrib.auth.views import redirect_to_login
 from django.views.generic.list_detail import object_list
 from models import Book, Category, CategoryType, FeedbackNote, Recommendation, User
-from settings import AMAZON_KEY, DEBUG
+from settings import AMAZON_KEY, DEBUG, BOOK_COVERS
 from booklistapp.utils import english_list
+from infxbooklist.booklistapp.forms import PictureForm
 import urllib
 import urllib2
 import ecs
@@ -58,7 +59,7 @@ def index(request, category):
                        paginate_by=10,
                        extra_context={'page_title': page_title,
                                       'complete_view': view=='complete',
-                                      'category_types': CategoryType.objects.all(),
+                                      'category_types': CategoryType.objects.all(),	
                                       'current_slug': category})
     
     
@@ -109,7 +110,7 @@ def edit(request):
                 print >>sys.stderr, repr(request.POST)
             elif request.POST['action'] == 'delete':
                 if len(Recommendation.objects.filter(book=r.book)) == 1:
-                    os.unlink(os.path.join('/opt/infxbooklist/bookcovers/', r.book.cover_image))
+                    os.unlink(os.path.join(BOOK_COVERS, r.book.cover_image))
                     r.book.delete()
                 r.delete()
         else:
@@ -130,7 +131,7 @@ def edit(request):
                     img_data = image_link.read()
                     image_link.close()
                     rand_fn = datetime.datetime.utcnow().isoformat()+'__'+str(random.randint(0, sys.maxint))
-                    rand_pth = os.path.join('/opt/infxbooklist/bookcovers', rand_fn)
+                    rand_pth = os.path.join(BOOK_COVERS, rand_fn)
                     with open(rand_pth, 'w') as f:
                         f.write(img_data)
                     b.cover_image = rand_fn
@@ -144,9 +145,29 @@ def edit(request):
         return HttpResponseRedirect("/edit/")
     # Go.
     return render_to_response('edit.html', context)
-    
+
 def profile(request):
-	return render_to_response('profile.html', {"foo" : "bar"})
+	if request.method == 'POST':
+		form = PictureForm(request.POST, request.FILES)
+		if form.is_valid():
+			user_profile = request.user.get_profile()
+			user_profile.picture = request.FILES['picture']
+			user_profile.save()
+            # Redirect to the document list after POST
+			return HttpResponseRedirect(reverse('booklistapp.views.profile'))
+	else:
+		user_profile = "blah"
+		form = PictureForm() # A empty, unbound form
+
+    # Load documents for the list page
+    #documents = Document.objects.all()
+
+    # Render list page with the documents and the form
+	return render_to_response(
+		'profile.html',
+		{'picture': user_profile.picture, 'form': form},
+		context_instance=RequestContext(request)
+	)
     
 def feedback(request):
     if 'text' in request.POST:

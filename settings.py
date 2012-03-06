@@ -1,16 +1,20 @@
-AMAZON_KEY = "10XP3WT61QS7AY0S2W02"
+import os
+import django
 
+AMAZON_KEY = "10XP3WT61QS7AY0S2W02"
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+BOOK_COVERS = os.path.join(SITE_ROOT, 'media/', 'covers')
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Cody Sparks', 'sparks.cody@gmail.com'),
+    ('Sam Kaufman', 'kaufmans@uci.edu'),
 )
 
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'     # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'booklist.db'   # Or path to database file if using sqlite3.
+DATABASE_NAME = '/usr/local/lib/python2.7/site-packages/django/db/booklist.db'   # Or path to database file if using sqlite3.
 DATABASE_USER = 'booklist'      # Not used with sqlite3.
 DATABASE_PASSWORD = 'elektric7' # Not used with sqlite3.
 DATABASE_HOST = ''              # Set to empty string for localhost. Not used with sqlite3.
@@ -35,7 +39,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(SITE_ROOT, 'media/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -45,7 +49,7 @@ MEDIA_URL = ''
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = 'assets/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '-bgt35&!q3(3sz384+zo@=oeqw*!06c1*$j32q-1%$bco_t^p('
@@ -65,7 +69,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'infxbooklist.urls'
 
 TEMPLATE_DIRS = (
-    '/root/project/infxbooklist/templates/'
+    os.path.join(SITE_ROOT, 'templates/')
 )
 
 INSTALLED_APPS = (
@@ -80,7 +84,13 @@ INSTALLED_APPS = (
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
+AUTHENTICATION_BACKENDS = (
+    'infxbooklist.uciwebauth.DjangoBackend',
+)
+
 LOGIN_URL = "/login/"
+
+ADMIN_UCINETIDS = ('kaufmans', 'kay', 'royr', 'sparksc')
 
 # If there is a local_settings module,
 # it should be allowed to override the

@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import ValidationError
 from django.contrib.auth.models import User
-from settings import AMAZON_KEY
+from settings import AMAZON_KEY, BOOK_COVERS
 from utils import english_list
 import ecs
 import urllib2
@@ -31,7 +31,7 @@ class Book(models.Model):
     isbn = ISBNField(null=True)
     title = models.CharField(max_length=200)
     authors = models.CharField(max_length=200)
-    cover_image = models.FilePathField(path="/opt/infxbooklist/bookcovers")
+    cover_image = models.FilePathField(path=BOOK_COVERS)
     added = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
     def __unicode__(self):
@@ -95,6 +95,6 @@ class FeedbackNote(models.Model):
         return self.text[:100]
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True, related_name='profile')
-    picture = models.CharField(max_length=100, default='http://http://www.ics.uci.edu/~kay/dgk1.jpg')
-    site = models.CharField(max_length=100, default='http://uci.edu')
+	user = models.ForeignKey(User, unique=True, related_name='profile')
+	picture = models.ImageField(upload_to='pictures')
+	site = models.CharField(max_length=100, default='http://uci.edu')

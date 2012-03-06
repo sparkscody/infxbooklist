@@ -68,6 +68,16 @@
 	<p align="center">Your current profile picture: </p>
 	<img class="displayed" src="http://www.ics.uci.edu/~kay/dgk1.jpg" width="75" height="100" />
 	<p align="center">If you'd like, you can upload a new one here: </p>
+	<!-- Upload form. Note enctype attribute! -->
+	<form action="/profile/" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.non_field_errors }}
+		{{ form.picture.help_text }}
+		{{ form.picture.label_tag }}
+		{{ form.picture.errors }}
+		{{ form.picture }}
+		<input type="submit" value="Upload" />
+	</form>
 	<form align="center" action="/profile/" method="get" accept-charset="utf-8">
 		<p><input type="text" name="keywords" value="" id="keywords" style="font-size: large" />
 			<input type="submit" value="Upload">
